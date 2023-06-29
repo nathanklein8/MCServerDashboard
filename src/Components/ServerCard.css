@@ -1,0 +1,24 @@
+.ServerCard {
+    border: 5px;
+    border-radius: 5px;
+    border-style: solid;
+    padding-bottom: 2%;
+    margin-bottom: 2%;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 2%;
+}
+
+.Button {
+    font-weight: bold;
+    font-size: large;
+
+}
+
+.StopButton {
+    background-color: red;
+}
+
+.StartButton {
+    background-color: greenyellow;
+}

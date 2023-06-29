@@ -1,9 +1,19 @@
+.TextFormat {
+  text-align: center;
+  font-size: calc(12px + 1vmin);
+  align-items: center;
+}
+
+.BiggerText {
+  font-size: calc(12px + 2vmin);
+}
+
 .App {
   text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 20vmin;
   pointer-events: none;
 }
 
@@ -21,7 +31,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(190, 190, 190);
 }
 
 .App-link {
@@ -32,6 +42,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

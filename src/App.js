@@ -1,23 +1,46 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import ServerCard from './Components/ServerCard';
 
 function App() {
+
+  // data from flask API on what servers exist
+  const [numServers, setNumServers] = useState(0);
+  const [serverList, setServerList] = useState([]);
+
+  useEffect(() => {
+    fetch('/servers').then(res => res.json()).then(data => {
+      setNumServers(data.numServers);
+      setServerList(data.servers);
+    });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='TextFormat'>
+      {
+        numServers === 0
+          ? (
+            <div>Unable to find any servers at the current directory.</div>
+          ) : (numServers === 1
+            ? (
+              <div>1 server installed</div>
+            ) : (<div>{numServers} servers installed</div>))
+      }
+      <button onClick={() => {
+        fetch('/servers').then(res => res.json()).then(data => {
+          setNumServers(data.numServers);
+          setServerList(data.servers);
+        });
+      }}>
+        refresh server list
+      </button>
+      <button>new server</button>
+
+      <div>
+        {serverList.map((s) => (
+          <ServerCard server={s} />
+        ))}
+      </div>
     </div>
   );
 }
