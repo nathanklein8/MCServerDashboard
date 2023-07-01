@@ -4,8 +4,8 @@
     border-style: solid;
     padding-bottom: 2%;
     margin-bottom: 2%;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 30%;
+    margin-right: 30%;
     margin-top: 2%;
 }
 
@@ -21,4 +21,8 @@
 
 .StartButton {
     background-color: greenyellow;
+}
+
+.RestartButton {
+    background-color: orange;
 }

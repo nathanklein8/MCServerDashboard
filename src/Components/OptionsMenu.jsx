@@ -26,7 +26,7 @@ const OptionsMenu = ({ serverName }) => {
           <div className="modal-content">
             <h2>Options for {serverName}</h2>
             <p>
-              lksjdflkjsfljsldfkssdfsdf
+              None
             </p>
             <button className="close-modal" onClick={toggleModal}>
               CLOSE
