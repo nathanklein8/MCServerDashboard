@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import ServerCard from './Components/ServerCard';
+import NewServerMenu from './Components/NewServerMenu'
 
 function App() {
 
@@ -34,8 +35,7 @@ function App() {
       }}>
         refresh server list
       </button>
-      <button>new server</button>
-
+      <NewServerMenu />
       <div>
         {serverList.map((s) => (
           <ServerCard server={s} />
