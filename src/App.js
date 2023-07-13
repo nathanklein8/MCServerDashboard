@@ -8,6 +8,7 @@ function App() {
   // data from flask API on what servers exist
   const [numServers, setNumServers] = useState(0);
   const [serverList, setServerList] = useState([]);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     fetch('/servers').then(res => res.json()).then(data => {
@@ -32,6 +33,7 @@ function App() {
           setNumServers(data.numServers);
           setServerList(data.servers);
         });
+        setRefresh(!refresh)
       }}>
         refresh server list
       </button>

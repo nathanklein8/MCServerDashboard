@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ServerCard.css'
 import OptionsMenu from './OptionsMenu';
 
@@ -13,26 +13,27 @@ const ServerCard = ({ server }) => {
     const [starting, setStarting] = useState(false);
     const [stopping, setStopping] = useState(false);
 
+    useEffect(() => {
+        checkOnline();
+        checkOffline();
+    });
+
     function checkOnline() {
-        console.log("checking online")
         fetch("/online?name=" + server.name).then(res => res.json()).then(data => {
             if (data.online) {
                 setOnline(data.online);
                 setStarting(false);
                 clearInterval(timer);
-                console.log("finished starting!");
             }
         });
     }
 
     function checkOffline() {
-        console.log("checking offline")
         fetch("/online?name=" + server.name).then(res => res.json()).then(data => {
             if (!data.online) {
                 setOnline(data.online);
                 setStopping(false);
                 clearInterval(timer);
-                console.log("finished stopping");
             }
         });
     }
@@ -70,4 +71,4 @@ const ServerCard = ({ server }) => {
     )
 }
 
-export default ServerCard
+export default ServerCard 
