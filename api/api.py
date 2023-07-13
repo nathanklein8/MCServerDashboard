@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import os
 import json
 import subprocess
@@ -17,6 +17,7 @@ def ip():
     return socket.gethostbyname(socket.gethostname())
 
 
+# returns true if server is online @ given port, false if offline
 def is_port_in_use(port):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     if s.connect_ex((str(ip()), port)) == 0:
@@ -25,11 +26,18 @@ def is_port_in_use(port):
     else:
         # connection failed, port must have been in use, or bad hostname
         return False
-    # try:
-    #     s.bind((ip(), port))
-    #     return False
-    # except socket.error as e:
-    #     return True
+
+
+# converts server.properties into json object, returns json object
+def read_properties(server):
+    props = dict()
+    with open(path + "/" + server + "/server.properties") as file:
+        for line in file:
+            text = line.strip().split("=")
+            if len(text) == 2:
+                props.update({text[0]: text[1]})
+        file.close()
+    return jsonify(props)
 
 
 def find_servers(folder):
@@ -78,10 +86,17 @@ def check_online():
     # find the port of the server w/ given name
     with open(path + "/" + server_name + "/server.properties") as file:
         for line in file:
-            text = line.split("=")
+            text = line.strip().split("=")
             if text[0] == "server-port":
                 port = int(text[1])
+    file.close()
     return {"online": is_port_in_use(port), "port": port}
+
+
+@app.route("/properties")
+def server_properties():
+    server_name = request.args.get("name")
+    return read_properties(server_name)
 
 
 if __name__ == "__main__":

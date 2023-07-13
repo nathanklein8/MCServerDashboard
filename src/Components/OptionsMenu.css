@@ -1,5 +1,5 @@
 body.active-modal {
-    overflow-y: hidden;
+    overflow-y: scroll;
 }
 
 .btn-modal {
@@ -7,6 +7,7 @@ body.active-modal {
     display: block;
     margin: 100px auto 0;
     font-size: 18px;
+    overflow-y: auto;
 }
 
 .modal,
@@ -17,7 +18,7 @@ body.active-modal {
     left: 0;
     right: 0;
     bottom: 0;
-    position: fixed;
+    overflow: auto;
 }
 
 .overlay {
@@ -35,6 +36,8 @@ body.active-modal {
     border-radius: 3px;
     max-width: 600px;
     min-width: 300px;
+    max-height: 75vh;
+    overflow-y: scroll;
 }
 
 .close-modal {
